@@ -10,3 +10,5 @@ firmware/keyboards/nyquist/.DS_Store
 firmware/keyboards/.DS_Store
 firmware/.DS_Store
 .DS_Store
+
+.ccls-cache
