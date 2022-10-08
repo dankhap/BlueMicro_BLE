@@ -1,5 +1,5 @@
 /*
-Copyright 2020-2021<Pierre Constantineau>
+Copyright 2018 <Pierre Constantineau>
 
 3-Clause BSD License
 
@@ -17,29 +17,40 @@ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR P
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
-#ifndef HARDWARE_CONFIG_H
-#define HARDWARE_CONFIG_H
-#include "hardware_variants.h"
-/* HARDWARE DEFINITION*/
-/* key matrix size */
-#define MATRIX_ROWS 1
-#define MATRIX_COLS 8
-#define MATRIX_ROW_PINS { 33 }
-/* 
-   .---------------------------. 
-   |  29  |   2  |  28  |   3  | 
-   |------+------+------+------| 
-   |  13  |  24  |   9  |  10  | 
-   `---------------------------' 
-*/
-#define MATRIX_COL_PINS { 29, 2, 28, 3, 13, 24, 9, 10}
-#define LED_G 42 //Green LED
-#define LED_R 36 //Red LED, the name LED_RED is defined elsewhere
-#define UNUSED_PINS {}
+#ifndef KEYMAP_H
+#define KEYMAP_H
+#include <stdint.h>
+#include "hid_keycodes.h"
+#include "keyboard_config.h"
+#include "advanced_keycodes.h"
+#include "Key.h"
+#include "KeyScanner.h"
+#include <array>
 
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION COL2ROW
-#define BATTERY_TYPE BATT_VDDH
 
-#define SPEAKER_PIN 45
-#endif /* HARDWARE_CONFIG_H */
+#include "BlueMicro_display.h"
+
+#ifdef BLUEMICRO_CONFIGURED_DISPLAY
+extern BlueMicro_Display OLED;        // needed to assign the update display callback
+extern DISPLAY_U8G2_CONSTRUCTOR u8g2; // needed to call the display functions
+#endif
+
+#define _QWERTY 0
+#define _LOWER  1
+#define _RAISE  2
+#define _ADJUST 3
+
+#define L_QWERTY  (LAYER_0 + _QWERTY)
+#define L_LOWER   (LAYER_0 + _LOWER)
+#define L_RAISE   (LAYER_0 + _RAISE)
+#define L_ADJUST  (LAYER_0 + _ADJUST)
+
+
+#define USER_LAYER_FUNCTION   0 
+void process_user_layers(uint16_t layermask);
+
+void setupKeymap();
+void encoder_callback(int step);
+extern std::array<std::array<Key, MATRIX_COLS>, MATRIX_ROWS> matrix;
+
+#endif /* KEYMAP_H */

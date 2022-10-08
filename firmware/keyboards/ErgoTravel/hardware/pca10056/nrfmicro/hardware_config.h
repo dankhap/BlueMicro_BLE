@@ -1,5 +1,5 @@
 /*
-Copyright 2020-2021<Pierre Constantineau>
+Copyright 2020-2021 <Pierre Constantineau>
 
 3-Clause BSD License
 
@@ -20,26 +20,30 @@ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR P
 #ifndef HARDWARE_CONFIG_H
 #define HARDWARE_CONFIG_H
 #include "hardware_variants.h"
+
 /* HARDWARE DEFINITION*/
 /* key matrix size */
-#define MATRIX_ROWS 1
-#define MATRIX_COLS 8
-#define MATRIX_ROW_PINS { 33 }
-/* 
-   .---------------------------. 
-   |  29  |   2  |  28  |   3  | 
-   |------+------+------+------| 
-   |  13  |  24  |   9  |  10  | 
-   `---------------------------' 
-*/
-#define MATRIX_COL_PINS { 29, 2, 28, 3, 13, 24, 9, 10}
-#define LED_G 42 //Green LED
-#define LED_R 36 //Red LED, the name LED_RED is defined elsewhere
-#define UNUSED_PINS {}
+#define MATRIX_ROWS 4
+#define MATRIX_COLS 7
 
+#define MATRIX_ROW_PINS {13, 24, 9, 10 }
+#define MATRIX_COL_PINS {31, 29, 2, 45, 3, 28, 43 }
+#define UNUSED_PINS {}
+#define BACKLIGHT_LED_PIN 38 
+#define DEFAULT_PWM_VALUE 10000            // PWM intensity
+#define BACKLIGHT_PWM_ON 1  
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
-#define BATTERY_TYPE BATT_VDDH
+        #define BATTERY_TYPE BATT_LIPO
+        #define VBAT_PIN  26
+        #define VCC_PIN 12
+#define VCC_POLARITY_ON 1
+#define  STATUS_BLE_LED_PIN  19  //blue = 0.19
+#define  STATUS_KB_LED_PIN 17  //red = 0.17
 
-#define SPEAKER_PIN 45
+
+    #define I2C_SDA_PIN 15
+    #define I2C_SCK_PIN 17
+
+    
 #endif /* HARDWARE_CONFIG_H */
